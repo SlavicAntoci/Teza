@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <a th:href="@{/addprof}">adauga prof</a>
+    <table>
+        <thead>
+            <tr>
+                <th>nume</th>
+                <th>prenume</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="profesor:${listprof}">
+                <td th:text="${profesor.nume}"></td>
+                <td th:text="${profesor.prenume}"></td>
+                <td >
+                    <a th:href="@{/update/prof/{id}(id=${profesor.id})}">update</a>
+                    <a th:href="@{/profesor/delelte/{id}(id=${profesor.id})}">delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

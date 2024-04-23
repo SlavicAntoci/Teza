@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="#" th:action="@{/profesor/save}" th:object="${profesor}" method="post">
+        <input type="text" th:field="*{nume}"/>
+        <input type="text" th:field="*{prenume}"/>
+        <button type="submit">submit</button>
+    </form>
+</body>
+</html>
