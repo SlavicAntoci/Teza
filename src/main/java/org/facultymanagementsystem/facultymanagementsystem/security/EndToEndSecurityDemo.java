@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,10 +13,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class EndToEndSecurityDemo {
+public class EndToEndSecurityDemo{
     private final EndToEndUserDetailsService userDetailsService;
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -44,7 +46,7 @@ public class EndToEndSecurityDemo {
                         .requestMatchers(
                                 new AntPathRequestMatcher("/users/**")
                         )
-                        .hasAuthority("ROLE_ADMIN")
+                        .hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin((login)-> login
@@ -59,7 +61,8 @@ public class EndToEndSecurityDemo {
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .logoutSuccessUrl("/")
                 )
-                .csrf(Customizer.withDefaults())
+                .csrf(withDefaults())
+                .httpBasic(withDefaults())
                 .build();
     }
 }

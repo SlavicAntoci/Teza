@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
 
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Getter

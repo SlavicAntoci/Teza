@@ -31,7 +31,7 @@ public class UserService implements IUserService{
         var user = new User(registration.getFirstName(), registration.getLastName(),
                 registration.getEmail(),
                 passwordEncoder.encode(registration.getPassword()),
-                Arrays.asList(new Role("ROLE_USER")));
+                Arrays.asList(new Role("ADMIN")));
         return userRepository.save(user);
     }
     @Override
@@ -39,6 +39,7 @@ public class UserService implements IUserService{
         return Optional.ofNullable(userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found")));
     }
+
     @Override
     public Optional<User> findById(Long id) {
         return userRepository.findById(id);
