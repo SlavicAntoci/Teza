@@ -4,7 +4,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/faculty_db
     username: postgres
-    password: Slavic2001
+    password: passwors
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -13,8 +13,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: antoci.slavic2001@gmail.com
-    password: wlmq ebsx rqgc gklb
+    username: username
+    password: password
     properties:
       mail:
         smtp:
