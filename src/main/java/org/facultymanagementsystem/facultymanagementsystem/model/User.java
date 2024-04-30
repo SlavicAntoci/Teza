@@ -30,6 +30,11 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles;
 
+    @ManyToMany
+    @JoinTable(name = "user_curs",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "curs_id", referencedColumnName = "id"))
+    private Collection<Curs> cursuri;
     public User(String firstName, String lastName, String email,
                 String password, Collection<Role> roles) {
         this.firstName = firstName;

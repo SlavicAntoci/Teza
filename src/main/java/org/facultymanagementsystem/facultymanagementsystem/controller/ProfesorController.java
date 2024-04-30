@@ -1,44 +1,52 @@
 package org.facultymanagementsystem.facultymanagementsystem.controller;
 
 import lombok.AllArgsConstructor;
-import org.facultymanagementsystem.facultymanagementsystem.model.Profesor;
-import org.facultymanagementsystem.facultymanagementsystem.service.ProfesorServiceImpl;
+import org.facultymanagementsystem.facultymanagementsystem.model.Curs;
+import org.facultymanagementsystem.facultymanagementsystem.model.User;
+import org.facultymanagementsystem.facultymanagementsystem.service.CursService;
+import org.facultymanagementsystem.facultymanagementsystem.service.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-@AllArgsConstructor
+import java.util.List;
+
 @Controller
+@AllArgsConstructor
+@RequestMapping("/theacher")
 public class ProfesorController {
-    private final ProfesorServiceImpl profesorService;
-    @GetMapping("/profesor")
-    public String viewProfesor(Model model){
-        model.addAttribute("listprof", profesorService.getAllProfesor());
-        return "profesor";
+    private final UserService userService;
+    private final CursService cursService;
+
+    @GetMapping("/page")
+    public String pageTeacher(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String professorEmail = authentication.getName();
+        User professor = userService.findByEmail(professorEmail).orElseThrow(); // Assuming the email is always present
+        List<Curs> courses = cursService.getCoursesForProfessor(professor);
+        model.addAttribute("courses", courses);
+        return "theacher";
     }
-    @GetMapping("/addprof")
-    public String addprof(Model model){
-        Profesor profesor = new Profesor();
-        model.addAttribute("profesor", profesor);
-        return "newprof";
+
+    @GetMapping("/addCourse")
+    public String addCourse() {
+        return "cour-add-formular";
     }
-    @PostMapping("/profesor/save")
-    public String saveprof(@ModelAttribute("profesor") Profesor profesor){
-        profesorService.save(profesor);
-        return "redirect:/profesor";
-    }
-    @GetMapping("/profesor/delelte/{id}")
-    public String deleteprofe(@PathVariable(value = "id") Integer id){
-        profesorService.deleteById(id);
-        return "redirect:/profesor";
-    }
-    @GetMapping("/update/prof/{id}")
-    public String updateprof(@PathVariable(value = "id") Integer id,Model model){
-        Profesor profesor = profesorService.getById(id);
-        model.addAttribute("prof", profesor);
-        return "updateprof";
+
+    @PostMapping("/addCourse")
+    public String addCourse(@RequestParam("nume") String nume) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String profesorEmail = authentication.getName();
+
+        User profesor = userService.findByEmail(profesorEmail).orElseThrow();
+
+        Curs curs = new Curs(nume, profesor);
+        cursService.addCurs(curs);
+        return "redirect:/theacher/addCourse?succes_addcourse";
     }
 }

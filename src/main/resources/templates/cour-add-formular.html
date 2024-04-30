@@ -1,10 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+<head th:replace="fragments :: boots_trap">
+    <meta charset="UTF-8">
+    <title>Add Course</title>
 </head>
 <body>
-$END$
+<div class="container offset-sm-2 col-md-8 mt-lg-5">
+    <div th:replace="fragments :: nav_bar"></div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">Add Course</h2>
+        </div>
+        <div th:if="${param.succes_addcourse}" class="alert alert-success" role="alert">
+            Course added successfully!
+        </div>
+        <div th:if="${param.fail_addcourse}" class="alert alert-danger" role="alert">
+            Failed to add course. Please try again.
+        </div>
+        <div class="card-body">
+            <form th:action="@{/theacher/addCourse}" method="post">
+                <div class="form-group">
+                    <label for="nume">Nume:</label>
+                    <input type="text" class="form-control" id="nume" name="nume" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>

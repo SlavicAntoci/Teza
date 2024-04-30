@@ -8,6 +8,38 @@
 <body>
 <div class="container offset-sm-2 col-md-8 mt-lg-5">
     <div th:replace="fragments :: nav_bar"></div>
+
+    <div th:if="${successMessage}" class="alert alert-success" role="alert">
+        <p th:text="${successMessage}"></p>
+    </div>
+
+    <div th:if="${failMessage}" class="alert alert-danger" role="alert">
+        <p th:text="${failMessage}"></p>
+    </div>
+
+    <!--    <div th:if="${#authorization.expression('hasRole(''USER'')')}">-->
+    <table class="table mt-3">
+        <thead>
+        <tr>
+            <th>Course Name</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="course : ${courses}">
+            <td th:text="${course.nume}"></td>
+            <td>
+                <a th:href="@{/courseDetails(courseId=${course.id})}" class="btn btn-primary">View Details</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <!--    </div>-->
+
+    <div th:if="${#authorization.expression('hasRole(''USER'')')}">
+        <a th:href="@{/enroll}" class="btn btn-primary">Register for the Course</a>
+    </div>
+
 </div>
 </body>
 </html>

@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+<head th:replace="fragments :: boots_trap">
+    <meta charset="UTF-8">
+    <title>Add to Course</title>
 </head>
 <body>
-$END$
+<div class="container offset-sm-2 col-md-8 mt-lg-5">
+    <div th:replace="fragments::nav_bar"></div>
+
+    <form th:action="@{/checkCourseCode}" method="post">
+        <div class="form-group">
+            <label for="courseCode">Enter Course Code:</label>
+            <input type="text" class="form-control" id="courseCode" name="courseCode" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Check Course Code</button>
+    </form>
+</div>
 </body>
 </html>

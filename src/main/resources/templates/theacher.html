@@ -1,10 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+<head th:replace="fragments :: boots_trap">
+    <meta charset="UTF-8">
+    <title>Theacher Page</title>
 </head>
 <body>
-$END$
+<div class="container offset-sm-2 col-md-8 mt-lg-5">
+    <div th:replace="fragments :: nav_bar"></div>
+
+    <a th:href="@{/theacher/addCourse}" class="btn btn-primary">Add Course</a>
+    <div class="container mt-5">
+        <h2>Your Courses</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Course Name</th>
+                <th>Course Password</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="course : ${courses}">
+                <td th:text="${course.nume}"></td>
+                <td th:text="${course.parola}"></td>
+                <td>
+                    <a th:href="@{/courseDetails(courseId=${course.id})}" class="btn btn-primary">Curs Details</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>

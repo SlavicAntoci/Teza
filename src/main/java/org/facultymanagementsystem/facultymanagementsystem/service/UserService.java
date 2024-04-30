@@ -14,9 +14,10 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
-public class UserService implements IUserService{
+public class UserService implements IUserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final VerificationTokenService verificationTokenService;
@@ -31,9 +32,20 @@ public class UserService implements IUserService{
         var user = new User(registration.getFirstName(), registration.getLastName(),
                 registration.getEmail(),
                 passwordEncoder.encode(registration.getPassword()),
-                Arrays.asList(new Role("ADMIN")));
+                Arrays.asList(new Role("USER")));
         return userRepository.save(user);
     }
+
+    @Override
+    public User registerUserTheacher(RegistrationRequest registration) {
+        var user = new User(registration.getFirstName(), registration.getLastName(),
+                registration.getEmail(),
+                passwordEncoder.encode(registration.getPassword()),
+                Arrays.asList(new Role("THEACHER")));
+        return userRepository.save(user);
+
+    }
+
     @Override
     public Optional<User> findByEmail(String email) {
         return Optional.ofNullable(userRepository.findByEmail(email)

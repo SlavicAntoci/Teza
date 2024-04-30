@@ -31,7 +31,6 @@ public class RegistrationController {
     private final IPasswordResetTokenService passwordResetTokenService;
     private final RegistrationCompleteEventListener eventListener;
 
-
     @GetMapping("/registration-form")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new RegistrationRequest());
