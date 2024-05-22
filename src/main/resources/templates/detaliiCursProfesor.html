@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalii Curs - Profesor</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <!-- Titlul paginii -->
+    <h2>Detalii Curs</h2>
+    <!-- Informații despre curs -->
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title" th:text="${curs.nume}"></h5>
+            <p class="card-text"><strong>Profesor:</strong> <span th:text="${curs.profesor.email}"></span></p>
+            <!-- Aici puteți adăuga și alte informații despre curs -->
+        </div>
+    </div>
+    <div class="mt-3">
+        <h4>Capitole</h4>
+        <div th:if="${#lists.isEmpty(capitole)}" class="alert alert-warning" role="alert">
+            Nu există capitole disponibile.
+        </div>
+        <div th:each="capitol : ${capitole}" class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${capitol.nume}"></h5>
+                <p class="card-text" th:text="${capitol.descriere}"></p>
+                <p class="card-text"><strong>Vizibil:</strong> <span th:text="${capitol.vizibil} ? 'Da' : 'Nu'"></span></p>
+
+                <a th:href="@{/theacher/capitole/{id}/editare(id=${capitol.id})}" class="btn btn-primary mr-2">Editare</a>
+                <a th:href="@{/theacher/capitole/{id}/stergere(id=${capitol.id})}" class="btn btn-danger">Ștergere</a>
+            </div>
+        </div>
+        <!-- Link pentru adăugarea unui nou capitol -->
+        <a th:href="@{/theacher/capitole/nou}" class="btn btn-success">Adăugare Capitol Nou</a>
+    </div>
+</div>
+<!-- Adăugați scripturile Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

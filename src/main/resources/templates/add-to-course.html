@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments :: boots_trap">
+<head th:replace="~{fragments :: boots_trap}">
     <meta charset="UTF-8">
     <title>Add to Course</title>
 </head>
 <body>
 <div class="container offset-sm-2 col-md-8 mt-lg-5">
-    <div th:replace="fragments::nav_bar"></div>
+    <div th:replace="~{fragments::nav_bar}"></div>
 
     <form th:action="@{/checkCourseCode}" method="post">
         <div class="form-group">

@@ -21,6 +21,12 @@ public class CursService implements ICursService{
     public List<Curs> getAllCurs() {
         return cursRepository.findAll();
     }
+
+    @Override
+    public Curs findById(Long id) {
+        return cursRepository.findById(id).orElseThrow(()->new EntityNotFoundException("Not found curs"));
+    }
+
     @Override
     public void addCurs(Curs curs) {
         curs.setParola(generateUniqueParola());
@@ -73,5 +79,10 @@ public class CursService implements ICursService{
         }
 
         return cursRepository.findAllByUsersContaining(user);
+    }
+
+    @Override
+    public Curs getCursById(Long idCurs) {
+        return cursRepository.findById(idCurs).orElseThrow(()->new EntityNotFoundException("Nu sa gasit curs"));
     }
 }

@@ -5,9 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.UUID;
 
 @Entity
 @Getter
@@ -23,6 +21,8 @@ public class Curs {
     @OneToOne
     @JoinColumn(name = "email_profesor")
     private User profesor;
+    @OneToMany(mappedBy = "curs")
+    private Collection<Capitol> capitole;
     @ManyToMany(mappedBy = "cursuri")
     private Collection<User> users;
 

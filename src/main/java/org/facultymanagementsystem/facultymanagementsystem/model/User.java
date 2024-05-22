@@ -35,6 +35,8 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "curs_id", referencedColumnName = "id"))
     private Collection<Curs> cursuri;
+    @ManyToMany(mappedBy = "utilizatori")
+    private List<Capitol> capitole;
     public User(String firstName, String lastName, String email,
                 String password, Collection<Role> roles) {
         this.firstName = firstName;

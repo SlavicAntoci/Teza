@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{fragments :: boots_trap}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editare Capitol</title>
+</head><body>
+<div class="container mt-5">
+    <div th:replace="~{fragments :: nav_bar}"></div>
+    <h2>Editare Capitol</h2>
+    <form th:action="@{/theacher/capitole/{id}/editare(id=${capitol.id})}" th:object="${capitol}" method="post">
+        <div class="form-group">
+            <label for="nume">Nume:</label>
+            <input type="text" class="form-control" id="nume" th:field="*{nume}" required/>
+        </div>
+        <div class="form-group">
+            <label for="descriere">Descriere:</label>
+            <textarea class="form-control" id="descriere" th:field="*{descriere}" rows="5"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="fisiere">Fișiere:</label>
+            <input type="file" class="form-control-file" id="fisiere" name="fisiere" multiple/>
+        </div>
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="vizibil" th:field="*{vizibil}"/>
+            <label class="form-check-label" for="vizibil">Vizibil</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Editare Capitol</button>
+    </form>
+</div>
+
+</body>
+</html>

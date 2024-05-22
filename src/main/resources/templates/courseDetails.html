@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{fragments :: boots_trap}">
+    <meta charset="UTF-8">
+    <title>Detalii Curs</title>
+</head>
+<body>
+
+<div class="container">
+    <div th:replace="~{fragments :: nav_bar}"></div>
+    <div th:if="${#lists.isEmpty(capitole)}" class="alert alert-warning" role="alert">
+        Nu există capitole disponibile.
+    </div>
+    <div th:each="capitol : ${capitole}" class="card mb-3">
+
+        <div class="card-body">
+            <h5 class="card-title" th:text="${capitol.nume}"></h5>
+            <p class="card-text" th:text="${capitol.descriere}"></p>
+            <p class="card-text"><strong>Vizibil:</strong> <span th:text="${capitol.vizibil} ? 'Da' : 'Nu'"></span></p>
+            <p class="card-text"><strong>Curs:</strong> <span th:text="${capitol.curs.nume}"></span></p>
+            <div th:each="fisier : ${capitol.fisiere}" class="mt-2">
+                <p><strong>Fisier:</strong> <span th:text="${fisier.numeFisier}"></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

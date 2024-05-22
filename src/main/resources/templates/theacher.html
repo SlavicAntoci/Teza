@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments :: boots_trap">
+<head th:replace="~{fragments :: boots_trap}">
     <meta charset="UTF-8">
     <title>Theacher Page</title>
 </head>
 <body>
 <div class="container offset-sm-2 col-md-8 mt-lg-5">
-    <div th:replace="fragments :: nav_bar"></div>
+    <div th:replace="~{fragments :: nav_bar}"></div>
 
     <a th:href="@{/theacher/addCourse}" class="btn btn-primary">Add Course</a>
     <div class="container mt-5">
@@ -24,7 +24,7 @@
                 <td th:text="${course.nume}"></td>
                 <td th:text="${course.parola}"></td>
                 <td>
-                    <a th:href="@{/courseDetails(courseId=${course.id})}" class="btn btn-primary">Curs Details</a>
+                    <a th:href="@{/theacher/courseDetails(courseId=${course.id})}" class="btn btn-primary">Curs Details</a>
                 </td>
             </tr>
             </tbody>
